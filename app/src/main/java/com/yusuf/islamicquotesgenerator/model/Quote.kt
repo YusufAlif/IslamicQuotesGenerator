@@ -1,6 +1,7 @@
 package com.yusuf.islamicquotesgenerator.model
 
-data class quotes(
+data class Quote(
     val quotes: String,
     val source: String,
+    val imageRes: Int
 )

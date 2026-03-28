@@ -1,9 +1,33 @@
 package com.yusuf.islamicquotesgenerator.model
 
+import com.yusuf.islamicquotesgenerator.R
+
 object source {
     val dummyquote = listOf(
-        quotes("Ketahuilah, bahwa kemenangan itu bersama dengan kesabaran, jalan keluar bersama dengan kesulitan, dan sesungguhnya setelah kesulitan ada kemudahan.", "Rasulullah SAW dalam HR. Tirmidzi no. 2516"),
-        quotes("Sabar dan syukur adalah dua kendaraan menuju surga; tidak akan sampai seseorang kecuali dengan keduanya.", "Ibnul Qayyim"),
-        quotes("Maka apabila engkau telah selesai dari suatu urusan, tetaplah bekerja keras untuk urusan yang lain.","QS. Al-Insyirah: 7"),
+        Quote(
+            quotes = "Sesungguhnya bersama kesulitan ada kemudahan.",
+            source = "QS. Al-Insyirah: 6",
+            imageRes = R.drawable.img_quran
+        ),
+        Quote(
+            quotes = "Dan Dia bersama kamu di mana saja kamu berada.",
+            source = "QS. Al-Hadid: 4",
+            imageRes = R.drawable.img_masjid
+        ),
+        Quote(
+            quotes = "Cukuplah Allah sebagai penolong kami.",
+            source = "QS. Ali Imran: 173",
+            imageRes = R.drawable.img_kaligrafi
+        ),
+        Quote(
+            quotes = "Boleh jadi kamu membenci sesuatu, padahal ia amat baik bagimu.",
+            source = "QS. Al-Baqarah: 216",
+            imageRes = R.drawable.img_langit
+        ),
+        Quote(
+            quotes = "Allah tidak membebani seseorang melainkan sesuai kesanggupannya.",
+            source = "QS. Al-Baqarah: 286",
+            imageRes = R.drawable.img_doa
+        )
     )
 }
