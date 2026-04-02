@@ -21,11 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.yusuf.islamicquotesgenerator.model.Quote
 import com.yusuf.islamicquotesgenerator.model.source
 import com.yusuf.islamicquotesgenerator.ui.theme.IslamicQuotesGeneratorTheme
@@ -62,9 +60,8 @@ fun IslamicQuotesScreen() {
         item {
             Text(
                 text = "Islamic Quotes",
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1B5E20),
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp, bottom = 4.dp),
@@ -72,8 +69,8 @@ fun IslamicQuotesScreen() {
             )
             Text(
                 text = "Inspirasi dari Al-Qur'an",
-                fontSize = 14.sp,
-                color = Color(0xFF388E3C),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
@@ -84,9 +81,8 @@ fun IslamicQuotesScreen() {
         item {
             Text(
                 text = "Kategori",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1B5E20),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             LazyRow(
@@ -107,9 +103,8 @@ fun IslamicQuotesScreen() {
         item {
             Text(
                 text = "Quote Hari Ini",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1B5E20),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             HighlightCard(quote = highlightedQuote)
@@ -118,10 +113,13 @@ fun IslamicQuotesScreen() {
                 onClick = { highlightedQuote = quotesList.random() },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2E7D32)
+                    containerColor = MaterialTheme.colorScheme.primary
                 )
             ) {
-                Text("🔀 Random Quote", color = Color.White)
+                Text(
+                    "🔀 Random Quote",
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
             Spacer(modifier = Modifier.height(8.dp))
         }
@@ -130,9 +128,8 @@ fun IslamicQuotesScreen() {
         item {
             Text(
                 text = "Semua Kutipan",
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1B5E20),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier.padding(bottom = 4.dp)
             )
         }
@@ -151,15 +148,23 @@ fun KategoriChip(label: String, isSelected: Boolean, onClick: () -> Unit) {
         onClick = onClick,
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (isSelected) Color(0xFF2E7D32) else Color(0xFFF1F8E9)
+            containerColor = if (isSelected)
+                MaterialTheme.colorScheme.primary
+            else
+                MaterialTheme.colorScheme.background
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Text(
             text = label,
-            fontSize = 13.sp,
-            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-            color = if (isSelected) Color.White else Color(0xFF2E7D32),
+            style = if (isSelected)
+                MaterialTheme.typography.titleSmall
+            else
+                MaterialTheme.typography.bodyMedium,
+            color = if (isSelected)
+                MaterialTheme.colorScheme.onPrimary
+            else
+                MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
     }
@@ -173,7 +178,9 @@ fun HighlightCard(quote: Quote) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF2E7D32)),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        ),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
@@ -193,27 +200,27 @@ fun HighlightCard(quote: Quote) {
                         .padding(8.dp)
                 ) {
                     Icon(
-                        imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                        imageVector = if (isFavorite) Icons.Filled.Favorite
+                        else Icons.Outlined.FavoriteBorder,
                         contentDescription = "Favorite Icon",
-                        tint = if (isFavorite) Color.Red else Color.White
+                        tint = if (isFavorite) Color.Red
+                        else MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
                     text = "❝ ${quote.quotes} ❞",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color.White,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "— ${quote.source}",
-                    fontSize = 14.sp,
-                    fontStyle = FontStyle.Italic,
-                    color = Color(0xFFA5D6A7),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End
                 )
@@ -231,7 +238,9 @@ fun QuoteCard(quote: Quote) {
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
             Box {
@@ -250,25 +259,25 @@ fun QuoteCard(quote: Quote) {
                         .padding(8.dp)
                 ) {
                     Icon(
-                        imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                        imageVector = if (isFavorite) Icons.Filled.Favorite
+                        else Icons.Outlined.FavoriteBorder,
                         contentDescription = "Favorite Icon",
-                        tint = if (isFavorite) Color.Red else Color.White
+                        tint = if (isFavorite) Color.Red
+                        else MaterialTheme.colorScheme.onPrimary
                     )
                 }
             }
             Column(modifier = Modifier.padding(16.dp)) {
                 Text(
                     text = "❝ ${quote.quotes} ❞",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = Color(0xFF1B5E20)
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.tertiary
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "— ${quote.source}",
-                    fontSize = 13.sp,
-                    fontStyle = FontStyle.Italic,
-                    color = Color(0xFF388E3C),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.secondary,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End
                 )
@@ -277,10 +286,13 @@ fun QuoteCard(quote: Quote) {
                     onClick = { },
                     modifier = Modifier.fillMaxWidth(),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF2E7D32)
+                        containerColor = MaterialTheme.colorScheme.primary
                     )
                 ) {
-                    Text("📋 Salin Quote", color = Color.White)
+                    Text(
+                        "📋 Salin Quote",
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
                 }
             }
         }
