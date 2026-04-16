@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.dp
 import com.yusuf.islamicquotesgenerator.model.Quote
 import com.yusuf.islamicquotesgenerator.model.source
 import com.yusuf.islamicquotesgenerator.ui.theme.IslamicQuotesGeneratorTheme
-// Import untuk Coroutine dan UI Feedback (Sesuai Modul 9)
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -131,7 +130,6 @@ fun IslamicQuotesScreen() {
                 )
             }
 
-            // List Quote dengan fitur Salin (Asynchronous)
             items(quotesList) { quote ->
                 QuoteCard(quote = quote, scope = scope, snackbarHostState = snackbarHostState)
             }
@@ -147,7 +145,7 @@ fun RandomQuoteButton(onRefresh: () -> Unit, scope: CoroutineScope, snackbarHost
         onClick = {
             scope.launch {
                 isLoading = true
-                delay(1500) // Simulasi loading (Modul 9 Hal 9)
+                delay(1500) // Simulasi loading
                 onRefresh()
                 isLoading = false
                 snackbarHostState.showSnackbar("Quote baru telah dimuat!")
@@ -157,7 +155,6 @@ fun RandomQuoteButton(onRefresh: () -> Unit, scope: CoroutineScope, snackbarHost
         enabled = !isLoading
     ) {
         if (isLoading) {
-            // Ini adalah lingkaran muter (Loading Indicator)
             CircularProgressIndicator(
                 modifier = Modifier.size(20.dp),
                 color = MaterialTheme.colorScheme.onPrimary,
@@ -210,7 +207,6 @@ fun QuoteCard(quote: Quote, scope: CoroutineScope, snackbarHostState: SnackbarHo
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 
-                // Tombol Salin dengan Coroutine
                 OutlinedButton(
                     onClick = {
                         scope.launch {
